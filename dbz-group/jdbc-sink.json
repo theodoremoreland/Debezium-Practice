@@ -3,7 +3,7 @@
     "config": {
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
         "tasks.max": "1",
-        "topics": "covid19_us, covid19_countries",
+        "topics": "covid19_us, covid19_countries, country",
         "connection.url": "jdbc:oracle:thin:@hostname:1521:dbz2",
         "connection.user": "user",
         "connection.password": "password",

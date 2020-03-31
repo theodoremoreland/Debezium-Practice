@@ -9,7 +9,7 @@
         "database.password": "password",
         "database.server.id": "184054",
         "database.server.name": "dbz",
-        "table.whitelist": "dbz.covid19_us, dbz.covid19_countries",
+        "table.whitelist": "dbz.covid19_us, dbz.covid19_countries, dbz.country",
         "database.history.kafka.bootstrap.servers": "kafka:9092",
         "database.history.kafka.topic": "schema-changes.dbz",
         "transforms": "route",
