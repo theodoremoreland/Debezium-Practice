@@ -5,7 +5,7 @@
 * Debezium plugin repo: https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/
 
 # Debezium using AWS ec2
-Create ec2 instance (save the key generated after creation in safe and memorable location):
+### Create ec2 instance (save the key generated after creation in safe and memorable location):
 
 * Server type = Ubuntu server 18 LTS - 64-bit (x86) (t2.Large 8GB of RAM) 
 * AMI ID (for reference) = ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-20200112 (ami-0fc20dd1da406780b)
