@@ -35,7 +35,7 @@ should say currently uses Java 11
 
     sudo update-alternatives --config java (pick the number for Java 8 and press ENTER)
 
-### Move to root (in case, not there already:
+### Move to root (in case, not there already):
 
     cd
 
@@ -46,7 +46,8 @@ should say currently uses Java 11
     sudo wget https://packages.confluent.io/archive/5.4/confluent-5.4.0-2.12.tar.gz
 
 ### 2.	
-Visit https://www.confluent.io/previous-versions/?_ga=2.51348321.970298139.1584974979-1665271302.1581446223&_gac=1.175301910.1584726100.EAIaIQobChMIu5_g2syp6AIVzv7jBx01YQ7sEAAYAiAAEgIBQ_D_BwE
+Visit: https://www.confluent.io/previous-versions/?_ga=2.51348321.970298139.1584974979-1665271302.1581446223&_gac=1.175301910.1584726100.EAIaIQobChMIu5_g2syp6AIVzv7jBx01YQ7sEAAYAiAAEgIBQ_D_BwE
+
 Then copy and paste the link to the download file of your choice into a text editor (you can grab the link by right clicking on the desired button and choosing “copy link address”). Remove all the characters after the “tar.gz”. Append newly modified link to the end of a “sudo wget” command in the instance terminal. Execute command.
 
 ### Unpack Confluent Platform Tarbel files:
@@ -209,18 +210,22 @@ OR
 # Debezium (Local Docker) with AWS RDS MySQL (WIP…)
 Create MySQL database on RDS. Enable public accessibility, select a backup retention of greater than 0, and create and apply a custom parameter group in which the logbin_format = ROW. Reboot server and proceed with the steps below (using MySQL version 5.7.22)
 
-Download Debezium Docker repo
-	https://github.com/debezium/debezium-examples/tree/master/unwrap-smt
+### Download Debezium Docker repo:
+
+* https://github.com/debezium/debezium-examples/tree/master/unwrap-smt
+
 The whole repo will be installed after running a git clone, but you can just remove all of the unnecessary files. Much of the contents of the Docker images can be removed as well.
 
-Download ojdbc6.jar
-	https://download.oracle.com/otn/utilities_drivers/jdbc/121010/ojdbc6.jar
-	from
-	https://www.oracle.com/database/technologies/jdbc-drivers-12c-downloads.html
+### Download ojdbc6.jar:
 
-Place ojdbc6.jar in the same directory as your Docker yaml files 
+* https://download.oracle.com/otn/utilities_drivers/jdbc/121010/ojdbc6.jar
 
-Modify jdbc-sink.json
+from: https://www.oracle.com/database/technologies/jdbc-drivers-12c-downloads.html
+
+### Place ojdbc6.jar in the same directory as your Docker yaml files
+
+### Modify jdbc-sink.json:
+<pre>
 {
     "name": "jdbc-sink",
     "config": {
@@ -240,8 +245,10 @@ Modify jdbc-sink.json
         "pk.mode": "record_key"
     }
 }
+</pre>
 
-Modify source.json
+### Modify source.json:
+<pre>
 {
     "name": "inventory-connector",
     "config": {
@@ -262,29 +269,39 @@ Modify source.json
         "transforms.route.replacement": "$3"
     }
 }
+</pre>
 
 
-Start the application
+### Start the application:
+
     export DEBEZIUM_VERSION=1.0
     docker-compose -f docker-compose-jdbc.yaml up
 
-Place ojdbc6.jar in kafka connect container plugin directory
+### Place ojdbc6.jar in kafka connect container plugin directory:
+
 	docker cp ojdbc6.jar dbz-group_connect_1:/kafka/libs
+
 Assumes you’ve named the folder containing your Docker yamls “dbz-group”
 
-Restart kafka connect container such that it loads new oracle jar
+### Restart kafka connect container such that it loads new oracle jar:
+
 	docker restart dbz-group_connect_1
+
 This can also be done in the Docker Desktop dashboard.
 
-Start Sink connector
+### Start Sink connector:
+
     curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @jdbc-sink.json
 
-Start Source connector
+### Start Source connector:
+
     curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json" http://localhost:8083/connectors/ -d @source.json
 
-View topics
+### View topics:
+
     docker exec -it dbz-group_kafka_1 ./bin/kafka-topics.sh --list --zookeeper zookeeper:2181
 
-View messages
+### View messages:
+
     docker exec -it dbz-group_kafka_1 ./bin/kafka-console-consumer.sh --bootstrap-server dbz-group_kafka_1:9092 --topic country --from-beginning
 
