@@ -1,10 +1,13 @@
+# DebeziumToElasticSearch (Deprecated)
+Walkthroughs for setting up change data capture with Kafka's Debezium plugin. Features a walkthrough for Docker to RDS and Ubuntu to ElasticSearch.
+
 ### Helpful links:
 * Kafka tutorials: https://developer.confluent.io/
 * Unwrap tutorial (Docker) - https://github.com/debezium/debezium-examples/tree/master/unwrap-smt
 * Debezium installation tutorial (didn’t work for me, but might still be helpful): https://rmoff.net/2018/03/24/streaming-data-from-mysql-into-kafka-with-kafka-connect-and-debezium/
 * Debezium plugin repo: https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/
 
-# Debezium using AWS ec2
+# AWS EC2 to AWS ElasticSearch
 ### Create ec2 instance (save the key generated after creation in safe and memorable location):
 
 * Server type = Ubuntu server 18 LTS - 64-bit (x86) (t2.Large 8GB of RAM) 
@@ -210,7 +213,7 @@ OR
     curl -XDELETE 'https://connection/index/’
 
 
-# Debezium (Local Docker) with AWS RDS MySQL (WIP…)
+# Local Docker container to AWS RDS MySQL (WIP…)
 Create MySQL database on RDS. Enable public accessibility, select a backup retention of greater than 0, and create and apply a custom parameter group in which the logbin_format = ROW. Reboot server and proceed with the steps below (using MySQL version 5.7.22)
 
 ### Download Debezium Docker repo:
