@@ -1,4 +1,4 @@
-# DebeziumToElasticSearch (Deprecated)
+# Debezium To ElasticSearch (Deprecated)
 Walkthroughs for setting up change data capture with Kafka's Debezium plugin. Features a walkthrough for Docker to RDS and Ubuntu to ElasticSearch.
 
 ### Helpful links:
